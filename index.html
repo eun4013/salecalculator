@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>할인계산기</title>
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Pretendard', sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+  }
+
+  #contents {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  #showResult {
+    margin-top: 20px;
+    font-size: 16px;
+    background: #e9f7ef;
+    padding: 16px;
+    border-left: 5px solid #28a745;
+    border-radius: 6px;
+    word-break: keep-all;
+  }
+
+  /* ✅ 반응형 처리 */
+  @media (max-width: 480px) {
+    body {
+      padding: 10px;
+    }
+
+    #contents {
+      padding: 16px;
+    }
+
+    input, button {
+      font-size: 15px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div id="contents">
+    <ul>
+      <li>
+        <label for="originPrice">원래가격</label>
+        <input type="text" id="originPrice">원
+      </li>
+      <li>
+        <label for="rate">할인율</label>
+        <input type="text" id="rate">%
+      </li>
+      <li>
+        <button onclick="calculator()">할인가격 계산하기</button>
+      </li>
+    </ul>
+    <div id="showResult"></div>
+  </div>
+  <script>
+    function calculator(){
+      let originPrice = parseFloat(document.getElementById("originPrice").value);
+      let rate = parseFloat(document.getElementById("rate").value);
+      let savePrice = 0;    //할인 가격
+      let resultPrice = 0;  //내야하는 돈
+
+        const messages = [
+    "절약왕이자너 😅😅😅",
+    "이 정도면 소비 천재 👑",
+    "똑똑한 소비 Good~ 👍",
+    "지갑이 웃고 있어요 💸😎",
+    "할인받고 기분도 UP ⬆️",
+    "이건 완전 이득이야 🎉",
+    "절약은 곧 투자지 💰📈",
+    "소비 요정이 아니라 소비 천재였네? 😇✨",
+    "할인까지 받아버리기~ 완전 갓벽 💅",
+    "이 정도면 거의 재테크 수준임 ㅋㅋ",
+    "이득의 끝을 달려버렸네 🚀",
+    "와... 나 진짜 똑똑하다 🤯",
+    "나 오늘 좀 멋진 듯? 🤭",
+    "지금 이 기분... 플렉스한 건 아닌데 플렉스 같아 🤑",
+    "할인받았다고 말 안 하면 손해임 👀",
+    "오늘도 돈 지킴이 성공! 🛡️💸"
+    ];
+
+      if(originPrice > 0 && rate >0){
+        savePrice = originPrice * (rate / 100);    //10,000원 기준 할인가격 2,000
+        resultPrice = originPrice - savePrice;     //낼 돈은 8,000
+      }
+
+      const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+
+      if(originPrice > 0 && rate > 0){
+        savePrice = originPrice * (rate / 100);
+        resultPrice = originPrice - savePrice;
+      }
+      
+      document.getElementById("showResult").innerHTML = 
+      "상품의 원래 가격은 " + originPrice + "원이고,<br>" +
+      "할인율은 " + rate + "% 임.<br>" + 
+      savePrice + "원을 절약한 " + resultPrice + "원에 살 수 있다구.<br>" + 
+      randomMsg;
+    }
+  </script>
+</body>
+</html>
